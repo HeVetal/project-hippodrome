@@ -18,7 +18,7 @@ public class Main {
         for (int i = 0; i < 100; i++) {
             hippodrome.move();
             watch(hippodrome);
-            TimeUnit.MILLISECONDS.sleep(200);
+            TimeUnit.MILLISECONDS.sleep(300);
         }
 
         String winnerName = hippodrome.getWinner().getName();
@@ -26,9 +26,9 @@ public class Main {
     }
 
     private static void watch(Hippodrome hippodrome) throws Exception {
+        System.out.println("\n".repeat(10));
         hippodrome.getHorses().stream()
                 .map(horse -> ".".repeat((int) horse.getDistance()) + horse.getName())
                 .forEach(System.out::println);
-        System.out.println("\n".repeat(10));
     }
 }
