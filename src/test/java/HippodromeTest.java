@@ -5,8 +5,13 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class HippodromeTest {
@@ -37,27 +42,17 @@ class HippodromeTest {
 
     @Test
     public void getHorses_returnHorses_() {
-//stream
-        List<Horse> list = new ArrayList<>();
-        for (int i = 0; i < 30; i++) {
-            list.add(new Horse("Zephyr " + i, i, i));
-        }
+        List<Horse> list = IntStream.range(0, 30).mapToObj(i -> new Horse("Zephyr " + i, i, i)).toList();
         Hippodrome hippodrome = new Hippodrome(list);
         assertEquals(list, hippodrome.getHorses());
     }
 
     @Test
     public void testMove() {
-       //stream
-        List<Horse> list = new ArrayList<>();
-        for (int i = 0; i < 50; i++) {
-            list.add(Mockito.mock(Horse.class));
-        }
+        List<Horse> list = IntStream.range(0, 50).mapToObj(i -> Mockito.mock(Horse.class)).toList();
         Hippodrome hippodrome = new Hippodrome(list);
         hippodrome.move();
-        for (Horse horse : list) {
-            Mockito.verify(horse, Mockito.times(1)).move();//stream
-        }
+        list.forEach(horse -> Mockito.verify(horse, Mockito.times(1)).move());
     }
 
     @Test
@@ -66,6 +61,6 @@ class HippodromeTest {
         Horse horse1 = new Horse("Pegasus", 2, 20);
         Horse horse2 = new Horse("Cherry", 3, 30);
         Hippodrome hippodrome = new Hippodrome(List.of(horse, horse1, horse2));
-        assertSame(horse2,hippodrome.getWinner());
+        assertSame(horse2, hippodrome.getWinner());
     }
 }

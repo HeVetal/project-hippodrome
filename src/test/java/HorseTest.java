@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockito.Mockito;
 
 import java.lang.reflect.Field;
 
@@ -129,5 +130,25 @@ class HorseTest {
         assertEquals(0.0, horse.getDistance());
     }
 
+    @Test
+    public void getDistanceReflection_returnZero_twoParam() throws NoSuchFieldException, IllegalAccessException {
+        Horse horse = new Horse(name, speed);
+
+        Field field = horse.getClass().getDeclaredField("distance");
+        field.setAccessible(true);
+        double actualDistance = (Double) field.get(horse);
+
+        assertEquals(0.0, actualDistance);
+
+    }
+
+    @Test
+    public void move() {
+        Horse horse = new Horse("Lucky", 2, 4);
+        //Mockito.verify(horse).move(Horse.getRandomDouble(0.2, 0.9));
+    }
+
+//reflex public void getDistance_returnZero_twoParam()
+    //move test
 
 }
