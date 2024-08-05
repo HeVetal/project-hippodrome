@@ -1,10 +1,10 @@
 import lombok.ToString;
+import lombok.extern.slf4j.Slf4j;
 
 import static java.util.Objects.isNull;
 
-@ToString
+@Slf4j
 public class Horse {
-    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(Hippodrome.class);
 
     private final String name;
     private final double speed;
